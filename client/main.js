@@ -11,6 +11,7 @@ import Signup from './components/Signup';
 import Feed from './components/Feed';
 import Browse from './components/Browse';
 import Requested from './components/Requested';
+// Don't forget to import components!!'
 
 render((
   <Router history={browserHistory}>
@@ -21,6 +22,11 @@ render((
     <Route path="/feed" component={Feed}>
       <Route path="/browse" component={Browse} />
       <Route path="/requested" component={Requested} />
+    </Route>
+    <Route path="/account" component={Account}>
+      <Route path="/upload" component={Upload} />
+      <Route path="/makeRequest" component={MakeRequest} />
+      <Route path="/wishlist" component={Wishlist} />
     </Route>
   </Router>
 ), document.getElementById('app'))
