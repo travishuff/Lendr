@@ -10,9 +10,9 @@ class Feed extends Component {
     return (
       <div>
         <h1>Main Nav Hub</h1>
-        <Link to="/browse">Browse!</Link>
-        <Link to="/requested">Requested!</Link>
-        <Link to="/account">Account!</Link>
+        <Link to="/browse">Browse </Link>
+        <Link to="/requested">Requested </Link>
+        <Link to="/userInfo">Account </Link>
         {this.props.children}
       </div>
     );

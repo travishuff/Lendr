@@ -11,7 +11,12 @@ import Signup from './components/Signup';
 import Feed from './components/Feed';
 import Browse from './components/Browse';
 import Requested from './components/Requested';
-// Don't forget to import components!!'
+import Account from './components/Account';
+import UserInfo from './components/UserInfo';
+import Upload from './components/Upload';
+import MakeRequest from './components/MakeRequest';
+import Wishlist from './components/Wishlist';
+
 
 render((
   <Router history={browserHistory}>
@@ -24,6 +29,7 @@ render((
       <Route path="/requested" component={Requested} />
     </Route>
     <Route path="/account" component={Account}>
+      <Route path="/userInfo" component={UserInfo} />
       <Route path="/upload" component={Upload} />
       <Route path="/makeRequest" component={MakeRequest} />
       <Route path="/wishlist" component={Wishlist} />
