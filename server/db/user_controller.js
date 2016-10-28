@@ -6,7 +6,10 @@ let userController = {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    username: {
+      type: Sequelize.STRING
+    },
+    password: {
       type: Sequelize.STRING
     },
     location: {

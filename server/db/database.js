@@ -8,6 +8,14 @@ const sequelize = new Sequelize('database.js', 'AndresOlivero', 'password', {
   host: 'localhost',
   dialect: 'postgres'
 });
+sequelize
+  .authenticate()
+  .then(function(err) {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(function (err) {
+    console.log('Unable to connect to the database:', err);
+  });
 
 // defining models for all three needed tables: Items, Users, and Requests,
 // pulling the schemas from the controller file
