@@ -22,6 +22,7 @@ let requestController = {
   getWishlist: (req, res, next) => {
     Request.findAll({ where: { lendeename: userName } })
       .then((data) => {
+        console.log(data);
         res.status(200);
         res.send(data);
       })

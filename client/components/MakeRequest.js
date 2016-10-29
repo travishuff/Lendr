@@ -12,9 +12,10 @@ class MakeRequest extends Component {
 
     console.log(title, note);
 
-    $.post('/makeRequest', { item: title, note: note })
-    .done(data => {
-      browserHistory.push('/userInfo')
+    $.post('/makeRequest', { itemname: title, note: note })
+      .done(data => {
+        console.log(data);
+        browserHistory.push('/userInfo')
     })
     .fail(() => console.error('error with makeRequest'));
   }
