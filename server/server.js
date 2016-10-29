@@ -4,7 +4,6 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const request = require('request');
-const dbFunctions = require('./db/database');
 
 /////////////////////////////////////////
 // Import middleware here
