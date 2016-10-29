@@ -14,11 +14,11 @@ class Upload extends Component {
 
     console.log(item, type, description, imageURL, dueDate);
 
-    // TO DO: Fill in Post Request Here
-    // Place push method within request callback
-
-    // push session to the below path
-    browserHistory.push('/userInfo')
+    $.post('/uploadItem', { itemname: title, itemtype: type, itemdescription: description, itempictureurl: imageURL, datedue: dueDate })
+    .done(data => {
+      browserHistory.push('/userInfo')
+    })
+    .fail(console.error('error with uploadItem'));
   }
 
   render() {

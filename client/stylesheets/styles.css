@@ -1,3 +1,6 @@
-* {
-  border: 1px dashed red !important;
+.flex-grid {
+  display: flex;
+}
+.col {
+  flex: 1;
 }

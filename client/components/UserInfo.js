@@ -5,9 +5,9 @@ class UserInfo extends Component {
     return (
       <div>
         <p>User Info Page!!!</p>
-        <div className="row">
-          <div className="col-md-6">Stuff I Lent</div>
-          <div className="col-md-4">Stuff I Borrow</div>
+        <div className="flex-grid">
+          <div className="col">Stuff I Lent</div>
+          <div className="col">Stuff I Borrow</div>
         </div>
         
 

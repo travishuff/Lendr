@@ -11,12 +11,11 @@ class MakeRequest extends Component {
 
     console.log(title, note);
 
-    // TO DO: Fill in Post Request Here
-    // Place push method within request callback
-
-    // push session to the below path
-    // push $.post..  .done  .fail
-    browserHistory.push('/userInfo')
+    $.post('/makeRequest', { item: title, note: note })
+    .done(data => {
+      browserHistory.push('/userInfo')
+    })
+    .fail(console.error('error with makeRequest'));
   }
 
   render() {
