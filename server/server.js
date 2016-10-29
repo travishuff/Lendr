@@ -16,7 +16,7 @@ const app = express();
 
 /////////////////////////////////////////
 // Parser middleware
-app.use(express.static(__dirname + '../'))
+app.use(express.static(__dirname + './../client/img'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'))
 })
 
-app.get('/styles.css', (req, res) => {
+app.get('/client/stylesheets/styles.css', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/stylesheets/styles.css'))
 })
 

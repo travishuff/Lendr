@@ -1,9 +1,20 @@
+/* grid system */
+
+.flex-grid {
+  display: flex;
+}
+.col {
+  flex: 1;
+}
+
+
+
 
 /* Start Component */
 .start-container {
   color: white;
   font-family: Raleway;
-  background-image: url('../img/background.jpg');
+  background-image: url('http://localhost:3000/background.jpg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100vh;
@@ -31,9 +42,64 @@
 
 }
 
-.flex-grid {
+
+
+/* Feed Component */
+
+
+/* Browse Component */
+.browse-body {
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: max;
+  height: 100vh;
 }
-.col {
-  flex: 1;
+
+.tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  width: 1000px;
+  height: 100vh;
+  background-color: #ffc13d;
 }
+
+.item-tile{}
+
+
+/* Flip Card */
+  .ReactFlipCard {
+    margin: 25px;
+    text-align: center;
+    flex: 1;
+  }
+  .ReactFlipCard,
+  .ReactFlipCard__Front,
+  .ReactFlipCard__Back {
+    box-sizing: border-box;
+    width: 250px;
+    height: 300px;
+  }
+  .ReactFlipCard__Front,
+  .ReactFlipCard__Back {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 25px;
+  }
+  .ReactFlipCard__Front, .ReactFlipCard__Front:focus {
+    background-color: #eee;
+    outline: 0;
+  }
+  .ReactFlipCard__Back, .ReactFlipCard__Back:focus {
+    background-color: #cef;
+    outline: 0;
+  }
+  #example {
+    text-align: center;
+  }
+
+
+
