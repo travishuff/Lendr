@@ -16,21 +16,32 @@ class Browse extends Component {
   }
 
   componentDidMount() {
-    // make post request here
+    // POST request to grab feed data upon component load
     $.get('/browse', (data) => {
-      console.log('Getting data from get req: ', data);
+      console.log(data);
+      // Create and fill an array with a 'false' flag
+      // depending on the # of items in our feed database
+      // react-flipcard defaults to 'false' when checking orientation of card
+      let flipStatusArr = [];
+      for (let i = 0; i < data.length; i++) {
+        flipStatusArr.push(false);
+      }
+
+      // Then, setState so we can access that feed data at the Tile level
+      this.setState({
+        isFlipped: flipStatusArr,
+        tileData: data
+      })
     });
-    // set up array length here after post request
-    this.setState({
-      isFlipped: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-    })
-    
-  }  
+  }
 
 
   render() {
+    // Render only as many Tiles as there are data from our GET request
     let tiles = [];
-    for (let i = 0; i < 15; i++) {
+    let len = this.state.tileData.length;
+
+    for (let i = 0; i < len; i++) {
       tiles.push(
         <Tile
           tileId={i}
@@ -38,8 +49,6 @@ class Browse extends Component {
           />
       );
     }
-
-
 
     return (
       <div className="browse-body">
@@ -53,47 +62,3 @@ class Browse extends Component {
 }
 
 export default Browse;
-
-          // <FlipCard
-          //   type="vertical"
-          //   disabled={false}
-          //   flipped={this.state.isFlipped}
-          //   onFlip={this.handleOnFlip}
-          //   onKeyDown={this.handleKeyDown}
-          //   >
-          //   <div>
-          //     <div>Front</div>
-          //     <button type="button" onClick={this.showBack}>Show back</button>
-          //     <div><small>(manual flip)</small></div>
-          //   </div>
-          //   <div>
-          //     <div>Back</div>
-          //     <button type="button" ref="backButton" onClick={this.showFront}>Show front</button>
-          //   </div>
-          // </FlipCard>
-
-
-
-  //           showBack() {
-  //   this.setState({
-  //     isFlipped: true
-  //   });
-  // }
-
-  // showFront() {
-  //   this.setState({
-  //     isFlipped: false
-  //   });
-  // }
-
-  // handleOnFlip(flipped) {
-  //   if (flipped) {
-  //     this.refs.backButton.getDOMNode().focus();
-  //   }
-  // }
-
-  // handleKeyDown(e) {
-  //   if (this.state.isFlipped && e.keyCode === 27) {
-  //     this.showFront();
-  //   }
-  // }
