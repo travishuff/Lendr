@@ -1,24 +1,22 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
 const cookieParser = require('cookie-parser');
 
 class MakeRequest extends Component {
-    makeReq(event) {
+  makeReq(event) {
     event.preventDefault();
 
     // get relevant data
     const title = event.target.elements[0].value;
     const note = event.target.elements[1].value;
-    const lendeeName = document.cookie.split('=').pop();
-    
-    console.log(title, note);
+    const lendeename = document.cookie.split('=').pop();
 
-    $.post('/makeRequest', {lendeename: lendeeName, itemname: title, note: note })
+    $.post('/makeRequest', { lendeename: lendeeName, itemname: title, note: note })
       .done(data => {
         console.log(data);
         browserHistory.push('/userInfo')
-    })
-    .fail(() => console.error('error with makeRequest'));
+      })
+      .fail(() => console.error('error with makeRequest'));
   }
 
   render() {

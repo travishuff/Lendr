@@ -22,7 +22,7 @@ class Signup extends Component {
         browserHistory.push('/browse');
       })
       .fail(() => {
-        browserHistory.push('/login');
+        browserHistory.push('/');
       })
   }
 

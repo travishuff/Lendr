@@ -23,7 +23,6 @@ let requestController = {
 
   //gets the wishlist on the profile (items requested by user)  
   getWishlist: (req, res, next) => {
-    console.log('serve console', req.cookies.username);
     Request.findAll({ where: { lendeename: req.cookies.username } })
       .then((data) => {
         console.log('all lendee requests server side', data);

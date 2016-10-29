@@ -9,7 +9,7 @@ class Start extends Component {
         <div className="start-contents">
           <h1>Lendr</h1>
           <br />
-          <h3>borrow stuff from your friends.</h3>
+          <h3>share stuff with your friends.</h3>
           <br />
           <br />
           {this.props.children}

@@ -1,38 +1,34 @@
-import React, {Component} from 'react'; 
+import React, { Component } from 'react';
 
 class Wishlist extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      wishlistArr: []
+      requested: []
     }
   }
+
   componentDidMount() {
-    // POST request to grab feed data upon component load
     $.get('/wishlist', (data) => {
       let requestedData = [];
-
-      for (let i = 0; i < data.length; i++) {
+     for (let i = 0; i < data.length; i++) {
         requestedData.push(
           <li>
             {data[i].itemname} {' '}
             {data[i].note} {' '}
+            {data[i].lendeename}
           </li>
-          
         )
       }
-
-      this.setState({
-        wishListArr: requestedData
-      })
-    });
+      this.setState({ requested: requestedData })
+    })
   }
 
   render() {
     return (
       <div>
         <ul>
-          {this.state.wishlistArr}
+          {this.state.requested}
         </ul>
       </div>
     );

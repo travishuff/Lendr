@@ -12,6 +12,7 @@ let userController = {
     sequelize.sync({ logging: console.log }).then(() => {
       User.create(req.body)
         .then(() => {
+          res.cookie('username', req.body.username);
           res.status(200).end();
         })
         .catch((error) => {
@@ -26,7 +27,7 @@ let userController = {
     User.findOne({ where: { username: req.body.username } })
       .then((user) => {
         if (req.body.password === user.password) {
-          res.cookie('username', user.username );
+          res.cookie('username', user.username);
           res.status(200).end();
           // user will be the first entry of the User table with the username 'username' or null (if not exists)
           // user.username will contain the username of the User

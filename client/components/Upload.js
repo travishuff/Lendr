@@ -27,7 +27,6 @@ class Upload extends Component {
   render() {
     return (
       <div>
-        Upload Page!
         <form className="form-inline" onSubmit={this.uploadItem}>
           <div><input type="text" className="form-control" name="item" placeholder="item" /></div>
             <div><select name="type" className="form-control">

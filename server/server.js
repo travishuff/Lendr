@@ -39,6 +39,7 @@ app.get('/bundle.js', (req, res) => {
 })
 
 app.get('/browse', getAllItems);
+app.get('/requested', getOpenRequests);
 app.get('/wishlist', getWishlist);
 
 /////////////////////////////////////////
@@ -47,8 +48,6 @@ app.post('/signup', createUser);
 app.post('/login', getUser);
 app.post('/uploadItem', createItem);
 app.post('/makeRequest', createRequest);
-
-app.post('/requested', getOpenRequests);
 app.post('/userInfo', getAllOwnerItems, getAllLendeeItems);
 
 
