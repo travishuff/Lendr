@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FlipCard from 'react-flipcard';
+import moment from 'moment';
 
 class Tile extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemname}</div>
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
-            <div className="back-child">{tileData[tileId].datedue}</div>
+            <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
           </div>
         </FlipCard>
       </div>
