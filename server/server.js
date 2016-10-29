@@ -6,6 +6,14 @@ const cookieParser = require('cookie-parser');
 const request = require('request');
 
 
+
+/////////////////////////////////////////
+// Import middleware here
+
+
+
 /////////////////////////////////////////
 // Initialize your express server
 const app = express();
+
+app.get('/login', verifyUser)
