@@ -22,8 +22,9 @@ let itemController = {
 
   getAllItems: (req, res, next) => {
     Item.findAll()
-      .then(() => {
-        res.status(200).end();
+      .then((data) => {
+        res.status(200);
+        res.send(data);
       })
       .catch((error) => {
         console.log('error:', error)
@@ -33,8 +34,9 @@ let itemController = {
 
   getAllOwnerItems: (req, res, next) => {
     Item.findAll({ where: { ownername: req.cookies.username } })
-      .then(() => {
-      res.status(200).end();
+      .then((data) => {
+        res.status(200);
+        res.send(data);
       })
       .catch((error) => {
         console.log('error:', error)
@@ -44,8 +46,9 @@ let itemController = {
 
   getAllLendeeItems: (req, res, next) => {
     Item.findAll({ where: { lendee: req.cookies.username } })
-      .then(() => {
-      res.status(200).end();
+      .then((data) => {
+        res.status(200);
+        res.send(data);
       })
       .catch((error) => {
         console.log('error:', error)

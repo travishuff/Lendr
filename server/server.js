@@ -39,6 +39,8 @@ app.get('/bundle.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../bundle.js'))
 })
 
+app.get('/browse', getAllItems);
+
 /////////////////////////////////////////
 // POST Requests
 app.post('/signup', createUser);
@@ -47,7 +49,6 @@ app.post('/uploadItem', createItem);
 app.post('/makeRequest', createRequest);
 app.post('/wishlist', getWishlist);
 app.post('/requested', getOpenRequests);
-app.post('/browse', getAllItems);
 app.post('/userInfo', getAllOwnerItems, getAllLendeeItems);
 
 

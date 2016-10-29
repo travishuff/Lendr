@@ -17,7 +17,9 @@ class Browse extends Component {
 
   componentDidMount() {
     // make post request here
-
+    $.get('/browse', (data) => {
+      console.log('Getting data from get req: ', data);
+    });
     // set up array length here after post request
     this.setState({
       isFlipped: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]

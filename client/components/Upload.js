@@ -31,7 +31,7 @@ class Upload extends Component {
               <option value="business">business</option>
               <option value="clothes">clothes</option>
               <option value="electronics">electronics</option>
-              <option value="homegoods">homegoods</option>
+              <option value="homegoods">home goods</option>
               <option value="music">music</option>
               <option value="sporting">sporting</option>
               <option value="transportation">transportation</option>
@@ -39,7 +39,7 @@ class Upload extends Component {
             </select></div>
           <div><input type="text" className="form-control" name="description" placeholder="description" /></div>
           <div><input type="text" className="form-control" name="imageURL" placeholder="image URL" /></div>
-          <div><input type="text" className="form-control" name="dueDate" placeholder="due date" /></div>
+          <div><input type="date" className="form-control" name="dueDate" placeholder="due date" /></div>
           <div><button type="submit" className="btn btn-primary">Submit</button></div>
         </form>
       </div>

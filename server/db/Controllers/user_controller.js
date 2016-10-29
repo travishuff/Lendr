@@ -22,14 +22,18 @@ let userController = {
   getUser: (req, res, next) => {
     User.findOne({ where: { username: req.body.username } })
       .then((user) => {
-        res.status(200).end();
-        // user will be the first entry of the User table with the username 'username' or null (if not exists)
-        // user.username will contain the username of the User
-        console.log(user);
+        if (req.body.password === user.password) {
+          res.status(200).end();
+          // user will be the first entry of the User table with the username 'username' or null (if not exists)
+          // user.username will contain the username of the User
+        }
+        else {
+          res.status(400).end();
+        }
       })
       .catch((err) => {
         console.log(err);
-        res.status(400).end()
+        res.status(400).end();
       })
   }
 }
