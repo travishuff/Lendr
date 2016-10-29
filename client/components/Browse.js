@@ -11,7 +11,7 @@ class Browse extends Component {
     super(props);
     this.state = {
       isFlipped: [],
-      tileData: []
+      tileData: [],
     };
   }
 

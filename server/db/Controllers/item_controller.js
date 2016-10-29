@@ -6,6 +6,7 @@ let Item = sequelize.define('item', itemSchema);
 
 // defines all of the functions that will be executed on the Item table 
 let itemController = {
+  // creates an item
   createItem: (req, res, next) => {
     console.log('reqBPODDY', req.body)
     sequelize.sync({ logging: console.log }).then(() => {
@@ -20,6 +21,7 @@ let itemController = {
     });
   },
 
+  // gets all items for the home browse page  
   getAllItems: (req, res, next) => {
     Item.findAll()
       .then((data) => {
@@ -32,9 +34,11 @@ let itemController = {
       });
   },
 
+  // gets all owner items for the account page
   getAllOwnerItems: (req, res, next) => {
     Item.findAll({ where: { ownername: req.cookies.username } })
       .then((data) => {
+        console.log('allowneritems', data);
         res.status(200);
         res.send(data);
       })
@@ -44,6 +48,7 @@ let itemController = {
       });
   },
 
+  // gets all lendee items for the account page
   getAllLendeeItems: (req, res, next) => {
     Item.findAll({ where: { lendee: req.cookies.username } })
       .then((data) => {
@@ -56,6 +61,7 @@ let itemController = {
       });
   },
 
+  //deletes an item
   deleteItem: (req, res, next) => {
     Item.destroy({ where: { ownername: req.cookies.username, itemname: req.body.itemname } })
       .then(() => {
