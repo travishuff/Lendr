@@ -9,7 +9,7 @@ class Signup extends Component {
     // access username and password values
     const username = event.target.elements[0].value;
     const password = event.target.elements[1].value;
-    const address = event.target.elements[2].value + ', ' + event.target.elements[3].value;
+    const location = event.target.elements[2].value + ', ' + event.target.elements[3].value;
 
     
     //////////////////////////////////
@@ -17,7 +17,7 @@ class Signup extends Component {
     // Redirects to signup page for invalid inputs
     // Maybe create error page 
 
-    $.post('/signup', { username: username, password: password, address: address })
+    $.post('/signup', { username: username, password: password, location: location, karma: 0 })
       .done((data) => {
         browserHistory.push('/browse');
       })

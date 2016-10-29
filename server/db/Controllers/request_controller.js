@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const sequelize = require('../database');
 const requestSchema = require('../Models/request_model');
 
 // creates the Request table
