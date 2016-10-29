@@ -16,6 +16,7 @@ import UserInfo from './components/UserInfo';
 import Upload from './components/Upload';
 import MakeRequest from './components/MakeRequest';
 import Wishlist from './components/Wishlist';
+import Karma from './components/Karma';
 
 
 render((

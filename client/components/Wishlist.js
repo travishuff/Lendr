@@ -5,6 +5,7 @@ class Wishlist extends Component {
     return (
       <div>
         Wishlist
+        {/* Iterate over User's Make Requests here, add a delete button to each */}
       </div>
     );
   }
