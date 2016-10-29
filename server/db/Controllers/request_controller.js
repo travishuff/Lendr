@@ -21,8 +21,9 @@ let requestController = {
 
   getWishlist: (req, res, next) => {
     Request.findAll({ where: { lendeename: userName } })
-      .then(() => {
-        res.status(200).end();
+      .then((data) => {
+        res.status(200);
+        res.send(data);
       })
       .catch((error) => {
         console.log('error:', errors);
@@ -32,8 +33,9 @@ let requestController = {
 
   getOpenRequests: (req, res, next) => {
     Request.findAll()
-      .then(() => {
-        res.status(200).end();
+      .then((data) => {
+        res.status(200);
+        res.send(data);
       })
       .catch(() => {
         console.log('error:', errors);
