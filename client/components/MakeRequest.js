@@ -16,7 +16,7 @@ class MakeRequest extends Component {
     .done(data => {
       browserHistory.push('/userInfo')
     })
-    .fail(console.error('error with makeRequest'));
+    .fail(() => console.error('error with makeRequest'));
   }
 
   render() {
