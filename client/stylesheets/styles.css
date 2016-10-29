@@ -1,14 +1,16 @@
-/* grid system */
+/* HTML Elements */
+h1 {
+   -webkit-text-stroke: 2px black;
+}
 
+
+/* grid system */
 .flex-grid {
   display: flex;
 }
 .col {
   flex: 1;
 }
-
-
-
 
 /* Start Component */
 .start-container {
@@ -41,7 +43,9 @@
 .start-contents .start-btn {
 
 }
-
+.login-button {
+  margin: 10px;
+}
 
 
 /* Feed Component */
@@ -101,5 +105,15 @@
     text-align: center;
   }
 
-
+.account-container {
+  color: white;
+  font-family: Raleway;
+  background-image: url('http://localhost:3000/background.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: max;  
+  padding: 0;
+  margin: 0;
+}
 
