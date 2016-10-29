@@ -1,3 +1,4 @@
+const Sequelize = require('sequelize');
 // defining the request schema
 
 requestSchema = {
