@@ -4,7 +4,7 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 class Account extends Component {
   render() {
     return (
-      <div className="container">
+      <div>
         <h1>Account Nav Hub</h1>
         <Link to="/browse">Browse </Link>
         <Link to="/userInfo">Account </Link>
