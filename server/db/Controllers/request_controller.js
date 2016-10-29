@@ -20,7 +20,7 @@ let requestController = {
   },
 
   getWishlist: (req, res, next) => {
-    Request.findAll({ where: { lendeename: userName } })
+    Request.findAll({ where: { lendeename: req.cookies.username } })
       .then((data) => {
         console.log(data);
         res.status(200);
