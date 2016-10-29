@@ -5,8 +5,7 @@ const Sequelize = require('sequelize');
 
 // setting up a sequel connection pool using postgres as the dialect 
 
-const sequelize = new Sequelize('lendrdb', 'edwardpark', 'shortybord', {
-  //what gets added as username and password??
+const sequelize = new Sequelize('lendrdb', 'AndresOlivero', 'wheretheredferngrows', {
   host: 'localhost',
   dialect: 'postgres'
 });
