@@ -18,7 +18,8 @@ class Browse extends Component {
   componentDidMount() {
     // POST request to grab feed data upon component load
     $.get('/browse', (data) => {
-      console.log(data);
+
+      /////////////////////////////////////////////////////////
       // Create and fill an array with a 'false' flag
       // depending on the # of items in our feed database
       // react-flipcard defaults to 'false' when checking orientation of card
@@ -52,7 +53,6 @@ class Browse extends Component {
 
     return (
       <div className="browse-body">
-        This is your browse feed!
         <div className="tile-container">
           {tiles}
         </div>

@@ -9,10 +9,11 @@ class MakeRequest extends Component {
     // get relevant data
     const title = event.target.elements[0].value;
     const note = event.target.elements[1].value;
+    const lendeename = document.cookie.split('=').pop();
 
     console.log(title, note);
 
-    $.post('/makeRequest', { itemname: title, note: note })
+    $.post('/makeRequest', { lendeename: lendeename, itemname: title, note: note })
       .done(data => {
         console.log(data);
         browserHistory.push('/userInfo')
