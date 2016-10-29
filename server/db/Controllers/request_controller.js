@@ -8,7 +8,7 @@ let Request = sequelize.define('request', requestSchema);
 let requestController = {
   createRequest: (req, res, next) => {
     sequelize.sync({ logging: console.log }).then(() => {
-      Request.create(request)
+      Request.create(req.body)
         .then(() => {
           res.status(200).end();
         })

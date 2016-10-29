@@ -22,15 +22,15 @@ itemSchema = {
   datedue: {
     type: Sequelize.DATE
   },
-  // ownername: {
-  //   type: Sequelize.STRING
-  // },
-  // lendee: {
-  //   type: Sequelize.STRING
-  // },
-  // datelent: {
-  //   type: Sequelize.DATE
-  // }
+  ownername: {
+    type: Sequelize.STRING
+  },
+  lendee: {
+    type: Sequelize.STRING
+  },
+  datelent: {
+    type: Sequelize.DATE
+  }
 };
 
 module.exports = itemSchema;

@@ -44,7 +44,11 @@ app.get('/bundle.js', (req, res) => {
 app.post('/signup', createUser);
 app.post('/login', getUser);
 app.post('/uploadItem', createItem);
-// app.post('/makeRequest', createRequest);
+app.post('/makeRequest', createRequest);
+app.post('/wishlist', getWishlist);
+app.post('/requested', getOpenRequests);
+app.post('/browse', getAllItems);
+app.post('/userInfo', getAllOwnerItems, getAllLendeeItems);
 
 
 
