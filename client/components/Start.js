@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-// let divStyle = {
-//   backgroundImage: 'url(' + 'http://phandroid.s3.amazonaws.com/wp-content/uploads/2015/01/field-5.jpg' + ')',
-//   display: flex
-// }
-
 class Start extends Component {
 
   render() {
