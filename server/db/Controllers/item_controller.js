@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const sequelize = require('../database');
 const itemSchema = require('../Models/item_model');
 
 // creates the Item table

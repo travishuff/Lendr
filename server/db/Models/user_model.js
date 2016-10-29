@@ -1,3 +1,5 @@
+const Sequelize = require('sequelize');
+
 // defining the user schema
 
 userSchema = {

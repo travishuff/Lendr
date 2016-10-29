@@ -3,13 +3,13 @@ import { CSSGrid, layout, measureItems, makeResponsive } from 'react-stonecutter
 
 //////////////////////////////
 // Render Tile children here
-import Tile from './components/Tile';
+// import Tile from './components/Tile';
 
 
 class Browse extends Component {
   constructor(props) {
     super(props);
-    this.state = [];
+    this.state = {};
   }
 
   render() {
@@ -18,9 +18,9 @@ class Browse extends Component {
       minPadding: 100
     });
 
-    let liStyle = {
-      backgroundColor: red
-    }
+    // let liStyle = {
+    //   backgroundColor: red
+    // }
 
     return (
       <div>

@@ -6,14 +6,14 @@ module.exports = {
     publicPath: '',
     filename: 'bundle.js'
   },
-  // devServer: {
-  //   proxy: {
-  //     '**': {
-  //       target: 'http://localhost:3000/',
-  //       secure: false
-  //     }
-  //   }
-  // },
+  devServer: {
+    proxy: {
+      '**': {
+        target: 'http://localhost:3000/',
+        secure: false
+      }
+    }
+  },
   watch: true,
   module: {
     loaders: [
