@@ -21,7 +21,7 @@ itemSchema = {
   lastavailabledate: {
     type: Sequelize.DATE
   },
-  owner: {
+  ownername: {
     type: Sequelize.STRING
   },
   lendee: {

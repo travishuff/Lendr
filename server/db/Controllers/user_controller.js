@@ -8,18 +8,18 @@ let User = sequelize.define('user', userSchema);
 let userController = {
   createUser: function (user) {
     sequelize.sync({ logging: console.log }).then(() => {
-        User.create(user, { validate: true }).catch(function (errors) { console.log('error:', errors) });
+        User.create(user).catch(function (errors) { console.log('error:', errors) });
     });
   },
 
-  verifyUser: function (username) { 
-    User.findOne({ where: {username: username}}).then(function(user) {
+  getUser: function (userName) { 
+    User.findOne({ where: {username: userName}}).then(function(user) {
         // user will be the first entry of the User table with the username 'username' or null (if not exists)
         // user.username will contain the username of the User
       console.log(user);
     })
   }
-  
+
 }
 
 module.exports = userController;

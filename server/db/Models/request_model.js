@@ -1,15 +1,10 @@
 // defining the request schema
 
 requestSchema = {
-  _id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  name: {
+  lendeename: {
     type: Sequelize.STRING
   },
-  item: {
+  itemname: {
     type: Sequelize.STRING
   },
   note: {
