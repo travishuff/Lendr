@@ -4,8 +4,8 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 class Account extends Component {
   render() {
     return (
-      <div>
-        <h1>Account Nav Hub</h1>
+      <div className="account-container">
+        <h2>Account Nav Hub</h2>
         <Link to="/browse">Browse </Link>
         <Link to="/userInfo">Account </Link>
         <Link to="/upload">Upload </Link>
