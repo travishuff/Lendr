@@ -7,6 +7,7 @@ let User = sequelize.define('user', userSchema);
 
 // defines all of the funtions that will be executed on the User table
 let userController = {
+  //creates a user
   createUser: (req, res, next) => {
     sequelize.sync({ logging: console.log }).then(() => {
       User.create(req.body)
@@ -21,6 +22,7 @@ let userController = {
     });
   },
 
+  //gets a user for validation on login  
   getUser: (req, res, next) => {
     User.findOne({ where: { username: req.body.username } })
       .then((user) => {

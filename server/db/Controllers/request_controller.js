@@ -1,11 +1,13 @@
 const sequelize = require('../database');
 const requestSchema = require('../Models/request_model');
+const cookieParser = require('cookie-parser');
 
 // creates the Request table
 let Request = sequelize.define('request', requestSchema);
 
 // defines all of the functions that will be executed on the Request table
 let requestController = {
+  //creates a request
   createRequest: (req, res, next) => {
     sequelize.sync({ logging: console.log }).then(() => {
       Request.create(req.body)
@@ -19,10 +21,11 @@ let requestController = {
     });
   },
 
+  //gets the wishlist on the profile (items requested by user)  
   getWishlist: (req, res, next) => {
     Request.findAll({ where: { lendeename: req.cookies.username } })
       .then((data) => {
-        console.log(data);
+        console.log('all lendee requests server side', data);
         res.status(200);
         res.send(data);
       })
@@ -32,6 +35,7 @@ let requestController = {
       });
   },
 
+  // gets all open requests to display on the browse page  
   getOpenRequests: (req, res, next) => {
     Request.findAll()
       .then((data) => {
@@ -44,6 +48,7 @@ let requestController = {
       })
   },
 
+  //deletes a request  
   deleteRequest: (req, res, next) => {
     Request.destroy({ where: { lendeename: itemArr[0], itemname: itemArr[1] } })
       .then(() => {

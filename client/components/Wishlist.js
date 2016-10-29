@@ -11,7 +11,7 @@ class Wishlist extends Component {
   componentDidMount() {
     $.get('/wishlist', (data) => {
       let requestedData = [];
-      for (let i = 0; i < data.length; i++) {
+     for (let i = 0; i < data.length; i++) {
         requestedData.push(
           <li>
             {data[i].itemname} {' '}
@@ -33,6 +33,8 @@ class Wishlist extends Component {
       </div>
     );
   }
+
+
 }
 
 export default Wishlist;
