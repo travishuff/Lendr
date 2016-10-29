@@ -8,13 +8,30 @@ let Request = sequelize.define('item', requestSchema);
 let requestController = {
   createRequest: function (request) {
     sequelize.sync({ logging: console.log }).then(() => {
-      Request.create(request, { validate: true }).catch(function (errors) { console.log('error:', errors) });
+      Request.create(request).catch(function (errors) { console.log('error:', errors) });
     });
   },
 
-  getWishlist: function (userName) { //not sure if we will use username or userId
-    
+  getWishlist: function (userName) {
+    Request.findAll({ where: { lendeename: userName } }).then(function(wishlist) {
+      // wishlist will be an array of Request instances with the specified username
+      console.log(wishlist);
+    })
+  },
+
+  getOpenRequests: function () {
+    Request.findAll().then(function (requests) {
+      // requests will be an array of all Request instances
+      console.log(requests);
+    })
+  },
+
+  deleteRequest: function (requestArr) {
+    Request.destroy({
+      where: {lendeename: itemArr[0], itemname: itemArr[1]}
+    })
   }
+  
 };
 
 module.exports = requestController;

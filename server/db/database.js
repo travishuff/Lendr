@@ -27,22 +27,45 @@ module.exports = function (data) {
       // data[action] should be equal to obj with all props that an item takes
       itemController.createItem(data[action]);
     }
-    if (action === 'createUser') {
+    else if (action === 'createUser') {
       // data[action] should be equal to obj with all props that a user takes
       userController.createUser(data[action]);
     }
-    if (action === 'createRequest') {
+    else if (action === 'createRequest') {
       // data[action] should be equal to obj with all props that a request takes
       requestController.createRequest(data[action]);
     }
-    if (action === 'verifyUser') {
+    else if (action === 'verifyUser' || action === 'getUserKarma') {
       // data[action] should be equal to a string that equals a user's username or userId??
-      userController.verifyUser(data[action]);
+      userController.getUser(data[action]);
     }
-    if (action === 'getWishlist') {
+    else if (action === 'getWishlist') {
       // data[action] should be equal to a string that equals a user's username or userId??
       requestController.getWishlist(data[action]);
     }
+    else if (action === 'getOpenRequests') {
+      requestController.getOpenRequests();
+    }
+    else if (action === 'getAllItems') {
+      requestController.getAllItems();
+    }
+    else if (action === 'getAllOwnerItems') {
+      //data[action] should be equal to the owner username
+      itemController.getAllOwnerItems(data[action]);
+    }
+    else if (action === 'getAllLendeeItems') {
+      //data[action] should be equal to the lendee username
+      itemController.getAllLendeeItems(data[action]);
+    }
+    else if (action === 'deleteItem') {
+      // data[action] should be equal to the owner username and item name --> [username, itemname]
+      itemController.deleteItem(data[action]);
+    }
+    else if (action === 'deleteRequest') {
+      // data[action] should be equal to the lendee username and the item name --> [username, itemname]
+      requestController.deleteRequest(data[action]);
+    }
+    else console.log('incorrect database action');
   }
 }
 
