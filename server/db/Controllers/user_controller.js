@@ -12,21 +12,14 @@ let userController = {
     });
   },
 
-  verifyUser: function (userId) {
-    User.findById(userId).then(function (user) {
-      //** do we want to use userId or username????
-        // if username, this will be the code: 
-          // User.findOne({
-            //   where: {username: username},
-            // }).then(function(user) {
-            //   // user will be the first entry of the Projects table with the title 'aProject' || null
-            //   // user.username will contain the name of the project
-            // })
-      // user will be an instance of User and stores the content of the table entry
-      // with id 'userId. if such an entry is not defined you will get null
+  verifyUser: function (username) { 
+    User.findOne({ where: {username: username}}).then(function(user) {
+        // user will be the first entry of the User table with the username 'username' or null (if not exists)
+        // user.username will contain the username of the User
       console.log(user);
     })
   }
+  
 }
 
 module.exports = userController;
