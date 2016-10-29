@@ -11,13 +11,19 @@ class Signup extends Component {
     const password = event.target.elements[1].value;
     const address = event.target.elements[2].value + ', ' + event.target.elements[3].value;
 
-    console.log(username, password, address);
+    
+    //////////////////////////////////
+    // Post request to create new user
+    // Redirects to signup page for invalid inputs
+    // Maybe create error page 
 
-    // TO DO: Fill in Post Request Here
-    // Place push method within request callback
-
-    // push session to the below path
-    browserHistory.push('/browse')
+    $.post('/signup', { username: username, password: password, address: address })
+      .done((data) => {
+        browserHistory.push('/browse');
+      })
+      .fail(() => {
+        browserHistory.push('/login');
+      })
   }
 
   render() {
