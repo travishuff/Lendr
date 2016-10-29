@@ -1,15 +1,16 @@
+const Sequelize = require('sequelize');
 // defining the item schema
 
 itemSchema = {
-  _id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  itemtype: {
+  // _id: {
+  //   type: Sequelize.INTEGER,
+  //   primaryKey: true,
+  //   autoIncrement: true,
+  // },
+  itemname: {
     type: Sequelize.STRING
   },
-  itemname: {
+  itemtype: {
     type: Sequelize.STRING
   },
   itemdescription: {
@@ -18,21 +19,18 @@ itemSchema = {
   itempictureurl: {
     type: Sequelize.STRING
   },
-  lastavailabledate: {
-    type: Sequelize.DATE
-  },
-  ownername: {
-    type: Sequelize.STRING
-  },
-  lendee: {
-    type: Sequelize.STRING
-  },
-  datelent: {
-    type: Sequelize.DATE
-  },
   datedue: {
     type: Sequelize.DATE
-  }
+  },
+  // ownername: {
+  //   type: Sequelize.STRING
+  // },
+  // lendee: {
+  //   type: Sequelize.STRING
+  // },
+  // datelent: {
+  //   type: Sequelize.DATE
+  // }
 };
 
 module.exports = itemSchema;

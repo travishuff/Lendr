@@ -6,40 +6,63 @@ let Item = sequelize.define('item', itemSchema);
 
 // defines all of the functions that will be executed on the Item table 
 let itemController = {
-  createItem: function (data) {
-    let item = data;
+  createItem: (req, res, next) => {
+    console.log('reqBPODDY', req.body)
     sequelize.sync({ logging: console.log }).then(() => {
-        Item.create(item).catch(function (errors) { console.log('error:', errors) });
+      Item.create(req.body)
+        .then(() => {
+          res.status(200).end();
+        })
+        .catch((error) => {
+          console.log('error:', error)
+          res.status(400).end();
+        });
     });
   },
 
-  getAllItems: function () {
-    Item.findAll().then(function (items) {
-      // items will be an array of all Item instances
-      console.log(items);
-    })
+  getAllItems: (req, res, next) => {
+    Item.findAll()
+      .then(() => {
+        res.status(200).end();
+      })
+      .catch((error) => {
+        console.log('error:', error)
+        res.status(400).end();
+      });
   },
 
-  getAllOwnerItems: function (userName) {
-    Item.findAll({ where: { username: userName } }).then(function(ownerItems) {
-      // ownerItems will be an array of Item instances with the specified username
-      console.log(ownerItems);
-    })
+  getAllOwnerItems: (req, res, next) => {
+    Item.findAll({ where: { ownername: req.cookies.username } })
+      .then(() => {
+      res.status(200).end();
+      })
+      .catch((error) => {
+        console.log('error:', error)
+        res.status(400).end();
+      });
   },
 
-  getAllLendeeItems: function (userName) {
-    Item.findAll({ where: { lendee: userName } }).then(function(lendeeItems) {
-      // lendeeItems will be an array of Item instances with the specified username
-      console.log(lendeeItems);
-    })
+  getAllLendeeItems: (req, res, next) => {
+    Item.findAll({ where: { lendee: req.cookies.username } })
+      .then(() => {
+      res.status(200).end();
+      })
+      .catch((error) => {
+        console.log('error:', error)
+        res.status(400).end();
+      });
   },
 
-  deleteItem: function (itemArr) {
-    Item.destroy({
-      where: {ownername: itemArr[0], itemname: itemArr[1]}
-    })
+  deleteItem: (req, res, next) => {
+    Item.destroy({ where: { ownername: req.cookies.username, itemname: req.body.itemname } })
+      .then(() => {
+      res.status(200).end();
+      })
+      .catch((error) => {
+        console.log('error:', error)
+        res.status(400).end();
+      });
   }
-  
 }  
 
 module.exports = itemController;

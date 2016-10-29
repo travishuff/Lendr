@@ -2,34 +2,54 @@ const sequelize = require('../database');
 const requestSchema = require('../Models/request_model');
 
 // creates the Request table
-let Request = sequelize.define('item', requestSchema);
+let Request = sequelize.define('request', requestSchema);
 
 // defines all of the functions that will be executed on the Request table
 let requestController = {
-  createRequest: function (request) {
+  createRequest: (req, res, next) => {
     sequelize.sync({ logging: console.log }).then(() => {
-      Request.create(request).catch(function (errors) { console.log('error:', errors) });
+      Request.create(request)
+        .then(() => {
+          res.status(200).end();
+        })
+        .catch((error) => {
+          console.log('error:', errors);
+          res.status(400).end();
+        });
     });
   },
 
-  getWishlist: function (userName) {
-    Request.findAll({ where: { lendeename: userName } }).then(function(wishlist) {
-      // wishlist will be an array of Request instances with the specified username
-      console.log(wishlist);
-    })
+  getWishlist: (req, res, next) => {
+    Request.findAll({ where: { lendeename: userName } })
+      .then(() => {
+        res.status(200).end();
+      })
+      .catch((error) => {
+        console.log('error:', errors);
+        res.status(400).end();
+      });
   },
 
-  getOpenRequests: function () {
-    Request.findAll().then(function (requests) {
-      // requests will be an array of all Request instances
-      console.log(requests);
-    })
+  getOpenRequests: (req, res, next) => {
+    Request.findAll()
+      .then(() => {
+        res.status(200).end();
+      })
+      .catch(() => {
+        console.log('error:', errors);
+        res.status(400).end();
+      })
   },
 
-  deleteRequest: function (requestArr) {
-    Request.destroy({
-      where: {lendeename: itemArr[0], itemname: itemArr[1]}
-    })
+  deleteRequest: (req, res, next) => {
+    Request.destroy({ where: { lendeename: itemArr[0], itemname: itemArr[1] } })
+      .then(() => {
+        res.status(200).end();
+      })
+      .catch(() => {
+        console.log('error:', errors);
+        res.status(400).end();
+      })
   }
   
 };

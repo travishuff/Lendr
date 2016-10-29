@@ -14,11 +14,11 @@ class Upload extends Component {
 
     console.log(item, type, description, imageURL, dueDate);
 
-    $.post('/uploadItem', { itemname: title, itemtype: type, itemdescription: description, itempictureurl: imageURL, datedue: dueDate })
-    .done(data => {
-      browserHistory.push('/userInfo')
+    $.post('/uploadItem', { itemname: item, itemtype: type, itemdescription: description, itempictureurl: imageURL, datedue: dueDate })
+    .done((data) => {
+      browserHistory.push('/userInfo');
     })
-    .fail(console.error('error with uploadItem'));
+    .fail(() => console.error('error with uploadItem'));
   }
 
   render() {
@@ -30,8 +30,8 @@ class Upload extends Component {
             <div><select name="type" className="form-control">
               <option value="business">business</option>
               <option value="clothes">clothes</option>
-              <option value="electrioncs">electrioncs</option>
-              <option value="home goods">home goods</option>
+              <option value="electronics">electronics</option>
+              <option value="homegoods">homegoods</option>
               <option value="music">music</option>
               <option value="sporting">sporting</option>
               <option value="transportation">transportation</option>

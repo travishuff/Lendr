@@ -9,6 +9,8 @@ const dbFunctions = require('./db/database');
 /////////////////////////////////////////
 // Import middleware here
 const { createUser, getUser } = require('./db/Controllers/user_controller');
+const { createItem, getAllItems, getAllOwnerItems, getAllLendeeItems, deleteItem } = require('./db/Controllers/item_controller');
+const { createRequest, getWishlist, getOpenRequests, deleteRequest } = require('./db/Controllers/request_controller');
 
 /////////////////////////////////////////
 // Initialize your express server
@@ -39,8 +41,10 @@ app.get('/bundle.js', (req, res) => {
 
 /////////////////////////////////////////
 // POST Requests
-app.post('/signup', createUser)
-app.post('/login', getUser)
+app.post('/signup', createUser);
+app.post('/login', getUser);
+app.post('/uploadItem', createItem);
+// app.post('/makeRequest', createRequest);
 
 
 

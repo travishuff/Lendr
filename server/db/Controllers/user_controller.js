@@ -17,14 +17,6 @@ let userController = {
           res.status(400).end();
         });
     });
-    // User.create(req.body)
-    //   .then(() => {
-    //     res.end(200);
-    //   })
-    //   .catch((error) => {
-    //     console.log('error:', error)
-    //     res.end(400);
-    //   });
   },
 
   getUser: (req, res, next) => {
