@@ -11,12 +11,19 @@ class Login extends Component {
     const username = event.target.elements[0].value;
     const password = event.target.elements[1].value;
 
-    // TO DO: Fill in Post Request Here
-    // Place push method within request callback
-    // If error, got back to login page
+    
+    //////////////////////////////////
+    // Post request to verify user
+    // Redirects to login page on invalid input
+    // Maybe create error page
 
-    // push session to the below path
-    browserHistory.push('/browse')
+    $.post('/login', { username: username, password: password })
+      .done((data) => {
+        browserHistory.push('/browse');
+      })
+      .fail(() => {
+        browserHistory.push('/login');
+      })
   }
 
   render() {
