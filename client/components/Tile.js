@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FlipCard from 'react-flipcard';
+import moment from 'moment';
 
 class Tile extends Component {
   constructor(props) {
@@ -40,6 +41,9 @@ class Tile extends Component {
   }
 
   render() {
+    let tileData = this.props.passedState.tileData;
+    let tileId = this.props.tileId;
+
     return (
       <div className="item-tile" onClick={this.clickToFlip}>
         <FlipCard
@@ -48,11 +52,14 @@ class Tile extends Component {
           onFlip={this.props.passedState.handleOnFlip}
           onKeyDown={this.handleKeyDown}
           >
-          <div>
-            <div>This should be the picture!</div>
+          <div className="front-card">
+            <img className="front-card-img" src={this.props.passedState.tileData[this.props.tileId].itempictureurl}></img>
           </div>
-          <div>
-            <div>This should be the description</div>
+          <div className="back-card">
+            <div className="back-child">{tileData[tileId].itemname}</div>
+            <div className="back-child">{tileData[tileId].itemdescription}</div>
+            <div className="back-child">{tileData[tileId].ownername}</div>
+            <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
           </div>
         </FlipCard>
       </div>
@@ -61,3 +68,4 @@ class Tile extends Component {
 }
 
 export default Tile;
+
