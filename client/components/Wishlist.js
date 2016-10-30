@@ -9,6 +9,8 @@ class Wishlist extends Component {
   }
 
   componentDidMount() {
+
+    //  Get wishlist (ie. all requests this user made) from DB
     $.get('/wishlist', (data) => {
       let requestedData = [];
      for (let i = 0; i < data.length; i++) {
@@ -33,7 +35,6 @@ class Wishlist extends Component {
       </div>
     );
   }
-
 
 }
 

@@ -1,14 +1,14 @@
 const Sequelize = require('sequelize');
-// const itemController = require('/item_controller');
-// const userController = require('/user_controller');
-// const requestController = require('/request_controller');
 
 // setting up a sequel connection pool using postgres as the dialect 
 
-const sequelize = new Sequelize('lendrdb', 'AndresOlivero', 'wheretheredferngrows', {
+//  Make sure to 'createdb lendrdb' in your Lendr repo folder to create initial database
+//  Set credentials below to your computer's username and password
+const sequelize = new Sequelize('lendrdb', '', '', {
   host: 'localhost',
   dialect: 'postgres'
 });
+
 // authenticating that the sequel connection was successfully created
 sequelize
   .authenticate()
