@@ -17,26 +17,23 @@ const app = express();
 
 /////////////////////////////////////////
 // Parser middleware
-app.use(express.static(__dirname + './../client/img'))
+app.use(express.static(__dirname + './../client/img'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-
-
 
 /////////////////////////////////////////
 // GET Requests
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'))
-})
+});
 
 app.get('/client/stylesheets/styles.css', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/stylesheets/styles.css'))
-})
+});
 
 app.get('/bundle.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../bundle.js'))
-})
+});
 
 app.get('/browse', getAllItems);
 app.get('/requested', getOpenRequests);
@@ -49,9 +46,6 @@ app.post('/login', getUser);
 app.post('/uploadItem', createItem);
 app.post('/makeRequest', createRequest);
 app.post('/userInfo', getAllOwnerItems, getAllLendeeItems);
-
-
-
 
 
 

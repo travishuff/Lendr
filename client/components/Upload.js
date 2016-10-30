@@ -17,6 +17,7 @@ class Upload extends Component {
     console.log(item, type, description, imageURL, dueDate);
     console.log(document.cookie.split('=').pop());
 
+    //  Post new item to DB
     $.post('/uploadItem', { itemname: item, itemtype: type, itemdescription: description, itempictureurl: imageURL, datedue: dueDate, ownername: ownerName })
     .done((data) => {
       browserHistory.push('/userInfo');

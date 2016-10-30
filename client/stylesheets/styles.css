@@ -1,4 +1,5 @@
-html, body, div, span, applet, object, iframe,
+/*      CSS Reset      */
+/*html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -17,10 +18,9 @@ time, mark, audio, video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-}
+}*/
 
 /* HTML Elements */
-
 h1 {
    -webkit-text-stroke: 2px black;
 }
@@ -47,26 +47,16 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-
 }
-
-
-
-
 .start-contents {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 140px;
 }
-
 .start-contents h1 {
   font-size: 7em;
 }
-
-
-.start-contents .start-btn {}
-
 .login-button {
   margin: 10px;
 }
@@ -84,7 +74,6 @@ h1 {
   margin: 0;
 }
 
-
 /* Feed component container */
 .feed-container {
   color: white;
@@ -96,12 +85,10 @@ h1 {
   width: max;  
   padding: 0;
   margin: 0;
-  
   display: flex;
   flex-direction: column;
   align-content: center;
 }
-
 .feed-header-container {
   display: flex;
   flex-wrap: wrap;
@@ -113,14 +100,10 @@ h1 {
   margin-right: auto;
   height: 100px;
 }
-
 .feed-navbar {
   clear: all;
   height: 20px;
 }
-
-
-
 
 /* Browse Component */
 .browse-body {
@@ -130,7 +113,6 @@ h1 {
   width: max;
   height: 100vh;
 }
-
 .tile-container {
   display: flex;
   flex-wrap: wrap;
@@ -141,9 +123,6 @@ h1 {
   height: 100vh;
 }
 
-.item-tile{}
-
-
 /* Card-Divs */
 .front-card, .back-card {
   display: flex;
@@ -153,11 +132,9 @@ h1 {
   height: 100%;
   color: black;
 }
-
 .back-card {
   flex-direction: column;
 }
-
 .front-card-img {
   max-width: 100%;
   max-height: 100%;
@@ -194,5 +171,3 @@ h1 {
   #example {
     text-align: center;
   }
-
-

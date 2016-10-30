@@ -11,12 +11,10 @@ class Signup extends Component {
     const password = event.target.elements[1].value;
     const location = event.target.elements[2].value + ', ' + event.target.elements[3].value;
 
-    
     //////////////////////////////////
     // Post request to create new user
     // Redirects to signup page for invalid inputs
     // Maybe create error page 
-
     $.post('/signup', { username: username, password: password, location: location, karma: 0 })
       .done((data) => {
         browserHistory.push('/browse');

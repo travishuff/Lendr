@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, browserHistory, hashHistory, IndexRoute, IndexLink } from 'react-router'
 
-
 ///////////////////////////////////
 // Imported React components
 import Start from './components/Start';
@@ -18,7 +17,7 @@ import MakeRequest from './components/MakeRequest';
 import Wishlist from './components/Wishlist';
 import Karma from './components/Karma';
 
-
+//  React-router used to set up routes
 render((
   <Router history={browserHistory}>
     <Route path="/" component={Start}>

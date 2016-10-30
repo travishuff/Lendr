@@ -9,14 +9,16 @@ class Requested extends Component {
   }
 
   componentDidMount() {
+    // POST request to grab feed data from DB upon component load
     $.get('/requested', (data) => {
       let requestedData = [];
       for (let i = 0; i < data.length; i++) {
         requestedData.push(
           <li>
-            {data[i].itemname} {' '}
-            {data[i].note} {' '}
-            {data[i].lendeename}
+            From: {data[i].lendeename}<br /> 
+            Item: {data[i].itemname}<br />
+            Note: {data[i].note}<br />
+            <p></p>
           </li>
         )
       }
