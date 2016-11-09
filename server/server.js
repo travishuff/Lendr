@@ -10,6 +10,8 @@ const request = require('request');
 const { createUser, getUser } = require('./db/Controllers/user_controller');
 const { createItem, getAllItems, getAllOwnerItems, getAllLendeeItems, deleteItem } = require('./db/Controllers/item_controller');
 const { createRequest, getWishlist, getOpenRequests, deleteRequest } = require('./db/Controllers/request_controller');
+const { requestCode, getAuthToken } = require('./db/Controllers/oauth_controller');
+
 
 /////////////////////////////////////////
 // Initialize your express server
@@ -38,9 +40,14 @@ app.get('/bundle.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../bundle.js'))
 })
 
+
 app.get('/browse', getAllItems);
 app.get('/requested', getOpenRequests);
 app.get('/wishlist', getWishlist);
+
+app.get('/github/auth', requestCode);
+app.get('/github/callback', getAuthToken);
+
 
 /////////////////////////////////////////
 // POST Requests

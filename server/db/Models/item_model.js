@@ -2,11 +2,6 @@ const Sequelize = require('sequelize');
 // defining the item schema
 
 itemSchema = {
-  // _id: {
-  //   type: Sequelize.INTEGER,
-  //   primaryKey: true,
-  //   autoIncrement: true,
-  // },
   itemname: {
     type: Sequelize.STRING
   },
