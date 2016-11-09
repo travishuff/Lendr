@@ -11,7 +11,7 @@ class MakeRequest extends Component {
     const note = event.target.elements[1].value;
     const lendeename = document.cookie.split('=').pop();
 
-    $.post('/makeRequest', { lendeename: lendeeName, itemname: title, note: note })
+    $.post('/makeRequest', { lendeename: lendeename, itemname: title, note: note })
       .done(data => {
         console.log(data);
         browserHistory.push('/userInfo')
