@@ -16,7 +16,6 @@ class Login extends Component {
     // Post request to verify user
     // Redirects to login page on invalid input
     // Maybe create error page
-
     $.post('/login', { username: username, password: password })
       .done((data) => {
         browserHistory.push('/browse');

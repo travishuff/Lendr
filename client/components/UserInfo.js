@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+//  To be completed...
 class UserInfo extends Component {
   render() {
     return (

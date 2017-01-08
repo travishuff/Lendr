@@ -11,6 +11,8 @@ class MakeRequest extends Component {
     const note = event.target.elements[1].value;
     const lendeename = document.cookie.split('=').pop();
 
+    //  Post request to be saved to the database
+
     $.post('/makeRequest', { lendeename: lendeename, itemname: title, note: note })
       .done(data => {
         console.log(data);
@@ -22,7 +24,6 @@ class MakeRequest extends Component {
   render() {
     return (
       <div>
-        Make a Request!
         <form className="form-inline" onSubmit={this.makeReq}>
           <div><input type="text" className="form-control" name="title" placeholder="title" /></div>
           <div><textarea rows="4" cols="50" className="form-control" name="note" placeholder="place a note here.." /></div>
