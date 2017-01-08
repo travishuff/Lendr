@@ -15,6 +15,11 @@ class Start extends Component {
           {this.props.children}
           <Link to="/login" className="btn btn-primary start-btn">Login</Link>
           <Link to="/signup" className="btn btn-primary start-btn">Signup</Link>
+          
+          <form method="get" action="/github/auth">
+            <button type="submit">Login with GitHub</button>
+          </form>
+          
         </div>
       </div>
     );

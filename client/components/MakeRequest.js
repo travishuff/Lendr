@@ -12,6 +12,7 @@ class MakeRequest extends Component {
     const lendeename = document.cookie.split('=').pop();
 
     //  Post request to be saved to the database
+
     $.post('/makeRequest', { lendeename: lendeename, itemname: title, note: note })
       .done(data => {
         console.log(data);
