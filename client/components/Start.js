@@ -1,26 +1,62 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 class Start extends Component {
+  verifyUser(event) {
+    event.preventDefault();
+    const username = event.target.elements[0].value;
+    const password = event.target.elements[1].value;
+
+    fetch('/login', {
+      method: 'post',
+      body: {
+        username,
+        password
+      }
+    })
+    .then(data => {
+        browserHistory.push('/home');
+    })
+    .catch((err) => {
+        console.error('FAILED POST REQUEST:', err);
+        browserHistory.push('/');
+    });
+  }
+
+  createUser(event) {
+    event.preventDefault();
+    const username = event.target.elements[0].value;
+    const password = event.target.elements[1].value;
+    const email = event.target.elements[2].value;
+    const location = event.target.elements[3].value + ', ' + event.target.elements[4].value;
+
+    fetch('/signup', {
+      method: 'post',
+      body: {
+        username,
+        password,
+        email,
+        location,
+        karma: 0
+      }
+    })
+    .then(data => browserHistory.push('/'))
+    .catch(err => browserHistory.push('/signup'));
+  }
 
   render() {
+    let children = React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, {
+        verifyUser: this.verifyUser,
+        createUser: this.createUser
+      });
+    });
+
     return (
-      <div className="start-container">
-        <div className="start-contents">
-          <h1>Lendr</h1>
-          <br />
-          <h3>share stuff with your friends.</h3>
-          <br />
-          <br />
-          {this.props.children}
-          <Link to="/login" className="btn btn-primary start-btn">Login</Link>
-          <Link to="/signup" className="btn btn-primary start-btn">Signup</Link>
-          
-          <form method="get" action="/github/auth">
-            <button type="submit">Login with GitHub</button>
-          </form>
-          
-        </div>
+      <div className="start">
+        <h1>Lendr</h1>
+        <h4>share stuff with your friends</h4>
+        {children}
       </div>
     );
   }
