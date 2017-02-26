@@ -5,9 +5,7 @@ const cookieParser = require('cookie-parser');
 // creates the Request table
 let Request = sequelize.define('request', requestSchema);
 
-// defines all of the functions that will be executed on the Request table
 const requestController = {
-  //creates a request
   createRequest: (req, res, next) => {
     console.log(req.body);
     sequelize.sync({ logging: console.log }).then(() => {
@@ -16,13 +14,12 @@ const requestController = {
           res.status(200).end();
         })
         .catch( error => {
-          console.log('error:', errors);
+          console.error('error:', errors);
           res.status(400).end();
         });
     });
   },
 
-  //gets the wishlist on the profile (items requested by user)
   getWishlist: (req, res, next) => {
     Request.findAll({ where: { lendeename: req.cookies.username } })
       .then((data) => {
@@ -31,12 +28,11 @@ const requestController = {
         res.send(data);
       })
       .catch((error) => {
-        console.log('error:', errors);
+        console.error('error:', errors);
         res.status(400).end();
       });
   },
 
-  // gets all open requests to display on the browse page
   getOpenRequests: (req, res, next) => {
     Request.findAll()
       .then((data) => {
@@ -44,21 +40,20 @@ const requestController = {
         res.send(data);
       })
       .catch(() => {
-        console.log('error:', errors);
+        console.error('error:', errors);
         res.status(400).end();
-      })
+      });
   },
 
-  //deletes a request
   deleteRequest: (req, res, next) => {
     Request.destroy({ where: { lendeename: itemArr[0], itemname: itemArr[1] } })
       .then(() => {
         res.status(200).end();
       })
       .catch(() => {
-        console.log('error:', errors);
+        console.error('error:', errors);
         res.status(400).end();
-      })
+      });
   }
 
 };

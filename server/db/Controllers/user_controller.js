@@ -28,7 +28,6 @@ const userController = {
     .catch(() => res.status(400).send('error'));
   },
 
-  //gets a user for validation on login
   getUser: (req, res, next) => {
     console.log('GET USER');
     sessions.find({

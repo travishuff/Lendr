@@ -26799,7 +26799,9 @@
 	    value: function getData() {
 	      var _this2 = this;
 
-	      $.get('/browse').done(function (data) {
+	      fetch('/browse').then(function (response) {
+	        return response.text();
+	      }).then(function (data) {
 	        var flipStatusArr = new Array(data.length).fill(false);
 	        _this2.setState({
 	          isFlipped: flipStatusArr,
@@ -26815,16 +26817,22 @@
 	      console.log('borrowItem: username is ' + username + ' and ownername is ' + tileData[tileId].ownername);
 	      if (username !== tileData[tileId].ownername) {
 	        console.log("Borrowing");
-	        $.post('/borrowItem', { username: username, tileData: tileData[tileId] }).done(function (data) {
+	        fetch('/borrowItem', {
+	          method: 'post',
+	          body: {
+	            username: username,
+	            tileData: tileData[tileId]
+	          }
+	        }).then(function (data) {
 	          console.log("Borrow successful");
 	          var newTiles = _this3.state.tileData;
 	          newTiles[tileId].lendee = username;
 	          _this3.setState({ tileData: newTiles });
-	        }).fail(function (error) {
-	          return console.log('Error with borrowItem', error.responseText);
+	        }).catch(function (error) {
+	          return console.error('Error with borrowItem', error.responseText);
 	        });
 	      } else {
-	        console.log("The owner cannot borrow their own item.");
+	        console.log('The owner cannot borrow their own item.');
 	      }
 	    }
 	  }, {
@@ -26833,15 +26841,21 @@
 	      var _this4 = this;
 
 	      if (username === tileData[tileId].ownername) {
-	        $.post('/deleteItem', { username: username, itemname: tileData[tileId].itemname }).done(function (data) {
+	        fetch('/deleteItem', {
+	          method: 'post',
+	          body: {
+	            username: username,
+	            itemname: tileData[tileId].itemname
+	          }
+	        }).then(function (data) {
 	          var newTiles = _this4.state.tileData;
 	          newTiles.splice(tileId, 1);
 	          _this4.setState({ tileData: newTiles });
-	        }).fail(function (error) {
-	          return console.lof('error with deleteItem', error);
+	        }).catch(function (error) {
+	          return console.error('error with deleteItem', error);
 	        });
 	      } else {
-	        console.log("Only the owner can delete an item.");
+	        console.log('Only the owner can delete an item.');
 	      }
 	    }
 	  }, {
@@ -51297,7 +51311,9 @@
 	      var _this2 = this;
 
 	      // POST request to grab feed data from DB upon component load
-	      $.get('/requested', function (data) {
+	      fetch('/requested').then(function (response) {
+	        return response.text();
+	      }).then(function (data) {
 	        var requestedData = [];
 	        for (var i = 0; i < data.length; i++) {
 	          requestedData.push(_react2.default.createElement(
@@ -51550,18 +51566,21 @@
 	      var owneremail = event.target.elements[5].value;
 	      var ownerName = document.cookie.split('=').pop();
 
-	      $.post('/uploadItem', {
-	        itemname: item,
-	        itemtype: type,
-	        itemdescription: description,
-	        itempictureurl: imageURL,
-	        datedue: dueDate,
-	        ownername: ownerName,
-	        owneremail: owneremail
-	      }).done(function (data) {
-	        _reactRouter.browserHistory.push('/browse');
-	      }).fail(function (error) {
-	        return console.log('Error with uploadItem:', error);
+	      fetch('/uploadItem', {
+	        method: 'post',
+	        body: {
+	          itemname: item,
+	          itemtype: type,
+	          itemdescription: description,
+	          itempictureurl: imageURL,
+	          datedue: dueDate,
+	          ownername: ownerName,
+	          owneremail: owneremail
+	        }
+	      }).then(function (data) {
+	        return _reactRouter.browserHistory.push('/browse');
+	      }).catch(function (error) {
+	        return console.error('Error with uploadItem:', error);
 	      });
 	    }
 	  }, {
@@ -51741,11 +51760,17 @@
 	      var lendeename = document.cookie.split('=').pop();
 
 	      //  Post request to be saved to the database
-	      $.post('/makeRequest', { lendeename: lendeename, itemname: title, note: note }).done(function (data) {
-
+	      fetch('/makeRequest', {
+	        method: 'post',
+	        body: {
+	          lendeename: lendeename,
+	          itemname: title,
+	          note: note
+	        }
+	      }).then(function (data) {
 	        console.log(data);
 	        _reactRouter.browserHistory.push('/userInfo');
-	      }).fail(function () {
+	      }).catch(function () {
 	        return console.error('error with makeRequest');
 	      });
 	    }
@@ -51837,7 +51862,9 @@
 	      var _this2 = this;
 
 	      //  Get wishlist (ie. all requests this user made) from DB
-	      $.get('/wishlist', function (data) {
+	      fetch('/wishlist').then(function (response) {
+	        return response.text();
+	      }).then(function (data) {
 	        var requestedData = [];
 	        for (var i = 0; i < data.length; i++) {
 	          requestedData.push(_react2.default.createElement(
