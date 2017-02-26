@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 
 //  Make sure to 'createdb lendrdb' in your Lendr repo folder to create initial database
 //  Set credentials below to your computer's username and password
-const sequelize = new Sequelize('lendrdb', 'travishuff', '', {
+const sequelize = new Sequelize('lendrdb', 'travis', 'tron1k', {
   host: 'localhost',
   dialect: 'postgres'
 });

@@ -22,7 +22,7 @@ let userController = {
     });
   },
 
-  //gets a user for validation on login  
+  //gets a user for validation on login
   getUser: (req, res, next) => {
     User.findOne({ where: { username: req.body.username } })
       .then((user) => {
