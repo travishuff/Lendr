@@ -6,22 +6,23 @@ const cookieParser = require('cookie-parser');
 let Request = sequelize.define('request', requestSchema);
 
 // defines all of the functions that will be executed on the Request table
-let requestController = {
+const requestController = {
   //creates a request
   createRequest: (req, res, next) => {
+    console.log(req.body);
     sequelize.sync({ logging: console.log }).then(() => {
       Request.create(req.body)
         .then(() => {
           res.status(200).end();
         })
-        .catch((error) => {
+        .catch( error => {
           console.log('error:', errors);
           res.status(400).end();
         });
     });
   },
 
-  //gets the wishlist on the profile (items requested by user)  
+  //gets the wishlist on the profile (items requested by user)
   getWishlist: (req, res, next) => {
     Request.findAll({ where: { lendeename: req.cookies.username } })
       .then((data) => {
@@ -35,7 +36,7 @@ let requestController = {
       });
   },
 
-  // gets all open requests to display on the browse page  
+  // gets all open requests to display on the browse page
   getOpenRequests: (req, res, next) => {
     Request.findAll()
       .then((data) => {
@@ -48,7 +49,7 @@ let requestController = {
       })
   },
 
-  //deletes a request  
+  //deletes a request
   deleteRequest: (req, res, next) => {
     Request.destroy({ where: { lendeename: itemArr[0], itemname: itemArr[1] } })
       .then(() => {
@@ -59,7 +60,7 @@ let requestController = {
         res.status(400).end();
       })
   }
-  
+
 };
 
 module.exports = requestController;

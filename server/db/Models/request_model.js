@@ -1,15 +1,14 @@
 const Sequelize = require('sequelize');
-// defining the request schema
 
 requestSchema = {
   lendeename: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   itemname: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   note: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   }
 };
 
