@@ -11,9 +11,11 @@ class Wishlist extends Component {
   componentDidMount() {
 
     //  Get wishlist (ie. all requests this user made) from DB
-    $.get('/wishlist', (data) => {
+    fetch('/wishlist')
+    .then(response => response.text())
+    .then((data) => {
       let requestedData = [];
-     for (let i = 0; i < data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         requestedData.push(
           <li>
             {data[i].itemname} {' '}
@@ -22,8 +24,8 @@ class Wishlist extends Component {
           </li>
         )
       }
-      this.setState({ requested: requestedData })
-    })
+      this.setState({ requested: requestedData });
+    });
   }
 
   render() {

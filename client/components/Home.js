@@ -18,7 +18,9 @@ class Home extends Component {
   }
 
   getData() {
-    $.get('/browse').done(data => {
+    fetch('/browse')
+    .then(response => response.text())
+    .then((data) => {
       const flipStatusArr = new Array(data.length).fill(false);
       this.setState({
         isFlipped: flipStatusArr,
@@ -31,29 +33,46 @@ class Home extends Component {
     console.log(`borrowItem: username is ${username} and ownername is ${tileData[tileId].ownername}`)
     if (username !== tileData[tileId].ownername) {
       console.log("Borrowing")
-      $.post('/borrowItem', { username: username, tileData: tileData[tileId] })
-        .done((data) => {
-          console.log("Borrow successful")
-          let newTiles = this.state.tileData;
-          newTiles[tileId].lendee = username;
-          this.setState({ tileData: newTiles })
-        })
-        .fail((error) => console.log('Error with borrowItem', error.responseText));
-    } else { console.log("The owner cannot borrow their own item.") }
+      fetch('/borrowItem', {
+        method: 'post',
+        body: {
+          username: username,
+          tileData: tileData[tileId]
+        }
+      })
+      .then((data) => {
+        console.log("Borrow successful")
+        let newTiles = this.state.tileData;
+        newTiles[tileId].lendee = username;
+        this.setState({ tileData: newTiles });
+      })
+      .catch(error => console.error('Error with borrowItem', error.responseText));
+    } else { 
+      console.log('The owner cannot borrow their own item.');
+    }
   }
 
   deleteItem(username, tileData, tileId) {
     if (username === tileData[tileId].ownername) {
-      $.post('/deleteItem', { username: username, itemname: tileData[tileId].itemname })
-        .done((data) => {
-          let newTiles = this.state.tileData;
-          newTiles.splice(tileId, 1);
-          this.setState({ tileData: newTiles })
-        })
-        .fail((error) => console.lof('error with deleteItem', error));
-    } else { console.log("Only the owner can delete an item.") }
+      fetch('/deleteItem', {
+        method: 'post',
+        body: {
+          username: username,
+          itemname: tileData[tileId].itemname
+        }
+      })
+      .then((data) => {
+        let newTiles = this.state.tileData;
+        newTiles.splice(tileId, 1);
+        this.setState({ tileData: newTiles })
+      })
+      .catch(error => console.error('error with deleteItem', error));
+    } else {
+      console.log('Only the owner can delete an item.');
+    }
   }
-  removeCookies(){
+
+  removeCookies() {
      document.cookie = 'username' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   }
 

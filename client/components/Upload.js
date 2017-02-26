@@ -13,8 +13,9 @@ class Upload extends Component {
     const owneremail = event.target.elements[5].value;
     const ownerName = document.cookie.split('=').pop();
 
-    $.post('/uploadItem',
-      {
+    fetch('/uploadItem', {
+      method: 'post',
+      body: {
         itemname: item,
         itemtype: type,
         itemdescription: description,
@@ -22,11 +23,10 @@ class Upload extends Component {
         datedue: dueDate,
         ownername: ownerName,
         owneremail: owneremail
-      })
-      .done((data) => {
-        browserHistory.push('/browse');
-      })
-      .fail((error) => console.log('Error with uploadItem:', error));
+      }
+    })
+    .then(data => browserHistory.push('/browse'))
+    .catch(error => console.error('Error with uploadItem:', error));
   }
 
   render() {
