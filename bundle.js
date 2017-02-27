@@ -36974,9 +36974,11 @@
 	        location: location,
 	        karma: 0
 	      }).then(function (data) {
-	        return _reactRouter.browserHistory.push('/');
+	        console.log('Create user was successful');
+	        _reactRouter.browserHistory.push('/');
 	      }).catch(function (err) {
-	        return _reactRouter.browserHistory.push('/signup');
+	        console.error('Create user was NOT successful');
+	        _reactRouter.browserHistory.push('/signup');
 	      });
 	    }
 	  }, {

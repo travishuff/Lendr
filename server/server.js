@@ -17,7 +17,7 @@ const app = express();
 
 /////////////////////////////////////////
 // Parser middleware
-app.use(express.static(path.join(__dirname, '../client/components')));
+// app.use(express.static(path.join(__dirname, '../client/components')));
 app.use(express.static(__dirname + './../client/img'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -35,13 +35,9 @@ app.use(session({
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'))
 });
-// app.post('/authenticate', (req,res) => {
-//     if (req.body) console.log(req.body);
-// });
 app.get('/client/stylesheets/styles.css', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/stylesheets/styles.css'))
 });
-
 app.get('/bundle.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../bundle.js'))
 });
@@ -51,7 +47,7 @@ app.get('/wishlist', getWishlist);
 
 /////////////////////////////////////////
 // POST Requests
-app.post('/signup', createUser,isLoggedIn);
+app.post('/signup', createUser, isLoggedIn);
 app.post('/login', getUser, checkSession)
 app.post('/uploadItem', createItem);
 app.post('/borrowItem', borrowItem);
@@ -59,9 +55,9 @@ app.post('/deleteItem', deleteItem);
 app.post('/makeRequest', createRequest);
 app.post('/userInfo', getAllItems);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'))
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../index.html'))
+// });
 
 
 app.listen(3000, () => {

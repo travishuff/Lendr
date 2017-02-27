@@ -1,5 +1,6 @@
 const sequelize = require('../database');
 const sessionSchema = require('../Models/sessions.js');
+
 let sessions = sequelize.define('sessions', sessionSchema);
 
 const sessionController = {
