@@ -27,14 +27,20 @@ class Start extends Component {
     const location = event.target.elements[3].value + ', ' + event.target.elements[4].value;
 
     axios.post('/signup', {
-        username,
-        password,
-        email,
-        location,
+        username: username,
+        password: password,
+        email: email,
+        location: location,
         karma: 0
     })
-    .then(data => browserHistory.push('/'))
-    .catch(err => browserHistory.push('/signup'));
+    .then(data => {
+      console.log('Create user was successful');
+      browserHistory.push('/');
+    })
+    .catch(err => {
+      console.error('Create user was NOT successful');
+      browserHistory.push('/signup')
+    });
   }
 
   render() {
