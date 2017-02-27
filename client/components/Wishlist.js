@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Wishlist extends Component {
   constructor(props) {
@@ -11,8 +12,7 @@ class Wishlist extends Component {
   componentDidMount() {
 
     //  Get wishlist (ie. all requests this user made) from DB
-    fetch('/wishlist')
-    .then(response => response.text())
+    axios.get('/wishlist')
     .then((data) => {
       let requestedData = [];
       for (let i = 0; i < data.length; i++) {
@@ -25,7 +25,8 @@ class Wishlist extends Component {
         )
       }
       this.setState({ requested: requestedData });
-    });
+    })
+    .catch(error => console.error(`Error message: ${error.message}`));
   }
 
   render() {

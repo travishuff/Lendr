@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
+import axios from 'axios';
 const cookieParser = require('cookie-parser');
 
 class Upload extends Component {
@@ -13,9 +14,7 @@ class Upload extends Component {
     const owneremail = event.target.elements[5].value;
     const ownerName = document.cookie.split('=').pop();
 
-    fetch('/uploadItem', {
-      method: 'post',
-      body: {
+    axios.post('/uploadItem', {
         itemname: item,
         itemtype: type,
         itemdescription: description,
@@ -23,10 +22,9 @@ class Upload extends Component {
         datedue: dueDate,
         ownername: ownerName,
         owneremail: owneremail
-      }
     })
     .then(data => browserHistory.push('/browse'))
-    .catch(error => console.error('Error with uploadItem:', error));
+    .catch(error => console.error(`Error message: ${error.message}`));
   }
 
   render() {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
+import axios from 'axios';
 const cookieParser = require('cookie-parser');
 
 class Home extends Component {
@@ -18,27 +19,24 @@ class Home extends Component {
   }
 
   getData() {
-    fetch('/browse')
-    .then(response => response.text())
+    axios.get('/browse')
     .then((data) => {
       const flipStatusArr = new Array(data.length).fill(false);
       this.setState({
         isFlipped: flipStatusArr,
         tileData: data
       });
-    });
+    })
+    .catch(error => console.error(`Error message: ${error.message}`));
   }
 
   borrowItem(username, tileData, tileId) {
     console.log(`borrowItem: username is ${username} and ownername is ${tileData[tileId].ownername}`)
     if (username !== tileData[tileId].ownername) {
       console.log("Borrowing")
-      fetch('/borrowItem', {
-        method: 'post',
-        body: {
-          username: username,
-          tileData: tileData[tileId]
-        }
+      axios.post('/borrowItem', {
+        username: username,
+        tileData: tileData[tileId]
       })
       .then((data) => {
         console.log("Borrow successful")
@@ -46,7 +44,7 @@ class Home extends Component {
         newTiles[tileId].lendee = username;
         this.setState({ tileData: newTiles });
       })
-      .catch(error => console.error('Error with borrowItem', error.responseText));
+      .catch(error => console.error(`Error message: ${error.message}`));
     } else { 
       console.log('The owner cannot borrow their own item.');
     }
@@ -54,19 +52,16 @@ class Home extends Component {
 
   deleteItem(username, tileData, tileId) {
     if (username === tileData[tileId].ownername) {
-      fetch('/deleteItem', {
-        method: 'post',
-        body: {
-          username: username,
-          itemname: tileData[tileId].itemname
-        }
+      axios.post('/deleteItem', {
+        username: username,
+        itemname: tileData[tileId].itemname
       })
       .then((data) => {
         let newTiles = this.state.tileData;
         newTiles.splice(tileId, 1);
         this.setState({ tileData: newTiles })
       })
-      .catch(error => console.error('error with deleteItem', error));
+      .catch(error => console.error(`Error message: ${error.message}`));
     } else {
       console.log('Only the owner can delete an item.');
     }

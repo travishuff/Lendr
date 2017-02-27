@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
+import axios from 'axios';
 
 class Start extends Component {
   verifyUser(event) {
@@ -7,16 +8,11 @@ class Start extends Component {
     const username = event.target.elements[0].value;
     const password = event.target.elements[1].value;
 
-    fetch('/login', {
-      method: 'post',
-      body: {
+    axios.post('/login', {
         username,
         password
-      }
     })
-    .then(data => {
-        browserHistory.push('/home');
-    })
+    .then(data => browserHistory.push('/home'))
     .catch((err) => {
         console.error('FAILED POST REQUEST:', err);
         browserHistory.push('/');
@@ -30,15 +26,12 @@ class Start extends Component {
     const email = event.target.elements[2].value;
     const location = event.target.elements[3].value + ', ' + event.target.elements[4].value;
 
-    fetch('/signup', {
-      method: 'post',
-      body: {
+    axios.post('/signup', {
         username,
         password,
         email,
         location,
         karma: 0
-      }
     })
     .then(data => browserHistory.push('/'))
     .catch(err => browserHistory.push('/signup'));

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
+import axios from 'axios';
 const cookieParser = require('cookie-parser');
 
 
@@ -16,19 +17,16 @@ class MakeRequest extends Component {
     const lendeename = document.cookie.split('=').pop();
 
     //  Post request to be saved to the database
-    fetch('/makeRequest', {
-      method: 'post',
-      body: {
+    axios.post('/makeRequest', {
         lendeename: lendeename,
         itemname: title,
         note: note
-      }
     })
     .then((data) => {
       console.log(data);
       browserHistory.push('/userInfo');
     })
-    .catch(() => console.error('error with makeRequest'));
+    .catch(error => console.error(`Error message: ${error.message}`));
   }
 
   render() {
