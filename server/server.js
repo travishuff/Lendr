@@ -55,9 +55,9 @@ app.post('/deleteItem', deleteItem);
 app.post('/makeRequest', createRequest);
 app.post('/userInfo', getAllItems);
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../index.html'))
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'))
+});
 
 
 app.listen(3000, () => {

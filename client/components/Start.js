@@ -7,16 +7,36 @@ class Start extends Component {
     event.preventDefault();
     const username = event.target.elements[0].value;
     const password = event.target.elements[1].value;
+    const submitData = {
+        username: username,
+        password: password
+    };
 
-    axios.post('/login', {
-        username,
-        password
-    })
-    .then(data => browserHistory.push('/home'))
-    .catch((err) => {
-        console.error('FAILED POST REQUEST:', err);
+    $.ajax({
+      type: 'POST',
+      url: '/login',
+      data: submitData,
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      success: function(res) {
+        console.log('Verify user was successful');
+        browserHistory.push('/home');
+      },
+      error: function(err) {
+        console.error('FAILED VERIFY-USER POST REQUEST:', err);
         browserHistory.push('/');
-    });
+      }
+    })
+
+    // axios.post('/login', submitData)
+    // .then((data) => {
+    //   console.log('Verify user was successful');
+    //   browserHistory.push('/home');
+    // })
+    // .catch((err) => {
+    //     console.error('FAILED VERIFY-USER POST REQUEST:', err);
+    //     browserHistory.push('/');
+    // });
   }
 
   createUser(event) {
@@ -33,18 +53,18 @@ class Start extends Component {
         location: location,
         karma: 0
     })
-    .then(data => {
+    .then((data) => {
       console.log('Create user was successful');
       browserHistory.push('/');
     })
-    .catch(err => {
-      console.error('Create user was NOT successful');
-      browserHistory.push('/signup')
+    .catch((err) => {
+      console.error('FAILED CREATE-USER POST REQUEST:', err);
+      browserHistory.push('/signup');
     });
   }
 
   render() {
-    let children = React.Children.map(this.props.children, child => {
+    let children = React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, {
         verifyUser: this.verifyUser,
         createUser: this.createUser

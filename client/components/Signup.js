@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const Signup = ({createUser}) => {
+const Signup = ({ createUser }) => {
   return (
     <div className="signup-form">
       <form onSubmit={createUser}>

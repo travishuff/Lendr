@@ -36947,16 +36947,36 @@
 	      event.preventDefault();
 	      var username = event.target.elements[0].value;
 	      var password = event.target.elements[1].value;
-
-	      _axios2.default.post('/login', {
+	      var submitData = {
 	        username: username,
 	        password: password
-	      }).then(function (data) {
-	        return _reactRouter.browserHistory.push('/home');
-	      }).catch(function (err) {
-	        console.error('FAILED POST REQUEST:', err);
-	        _reactRouter.browserHistory.push('/');
+	      };
+
+	      $.ajax({
+	        type: 'POST',
+	        url: '/login',
+	        data: submitData,
+	        contentType: 'application/json; charset=utf-8',
+	        dataType: 'json',
+	        success: function success(res) {
+	          console.log('Verify user was successful');
+	          _reactRouter.browserHistory.push('/home');
+	        },
+	        error: function error(err) {
+	          console.error('FAILED VERIFY-USER POST REQUEST:', err);
+	          _reactRouter.browserHistory.push('/');
+	        }
 	      });
+
+	      // axios.post('/login', submitData)
+	      // .then((data) => {
+	      //   console.log('Verify user was successful');
+	      //   browserHistory.push('/home');
+	      // })
+	      // .catch((err) => {
+	      //     console.error('FAILED VERIFY-USER POST REQUEST:', err);
+	      //     browserHistory.push('/');
+	      // });
 	    }
 	  }, {
 	    key: 'createUser',
@@ -36977,7 +36997,7 @@
 	        console.log('Create user was successful');
 	        _reactRouter.browserHistory.push('/');
 	      }).catch(function (err) {
-	        console.error('Create user was NOT successful');
+	        console.error('FAILED CREATE-USER POST REQUEST:', err);
 	        _reactRouter.browserHistory.push('/signup');
 	      });
 	    }
