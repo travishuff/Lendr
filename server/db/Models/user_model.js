@@ -1,21 +1,25 @@
 const Sequelize = require('sequelize');
 
+// defining the user schema
+
 userSchema = {
+  // _id: {
+  //   type: Sequelize.INTEGER,
+  //   primaryKey: true,
+  //   autoIncrement: true,
+  // },
   username: {
     type: Sequelize.STRING,
-    unique: true,
+    unique: true
   },
   password: {
-    type: Sequelize.STRING,
-  },
-  email: {
     type: Sequelize.STRING
   },
   location: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   karma: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.INTEGER
   }
 }
 

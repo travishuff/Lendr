@@ -1,26 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { Component } from 'react';
+import { Router, Route, Link, browserHistory } from 'react-router';
+import $ from "jquery";
 
-const Login = ({ verifyUser }) => {
-  return (
-    <div className="login-form">
-      <form onSubmit={verifyUser}>
-        <div className="form-group">
-          <label for="username">Username:</label>
-          <input type="text" className="form-control" name="username" placeholder="username" />
-        </div>
-        <div className="form-group">
-          <label for="password">Password:</label>
-          <input type="password" className="form-control" name="password" placeholder="password" />
-        </div>
-        <div className="checkbox">
-          <label><input type="checkbox" />Remember me</label>
-        </div>
-        <button type="submit" className="btn btn-primary">Login</button>
-        <Link to="/signup" className="btn btn-primary">Signup</Link>
-      </form>
-    </div>
-  );
+class Login extends Component {
+
+  verifyUser(event) {
+    event.preventDefault();
+
+    // access username and password values
+    const username = event.target.elements[0].value;
+    const password = event.target.elements[1].value;
+
+    //////////////////////////////////
+    // Post request to verify user
+    // Redirects to login page on invalid input
+    $.post('/login', { username: username, password: password })
+      .done((data) => {
+        browserHistory.push('/browse');
+      })
+      .fail(() => {
+        browserHistory.push('/');
+      })
+  }
+
+  render() {
+    return (
+      <div>
+        <form className="form-inline" onSubmit={this.verifyUser}>
+          <div className="form-group">
+            Username: <input type="text" className="form-control" name="username" placeholder="username" /><br />
+          </div>
+          <div className="form-group">
+            Password: <input type="password" className="form-control" name="password" placeholder="password" /><br />
+          </div>
+          <button type="submit" className="btn btn-success">Login</button>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default Login;

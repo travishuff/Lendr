@@ -1,88 +1,49 @@
 const sequelize = require('../database');
+const cookieParser = require('cookie-parser');
 const userSchema = require('../Models/user_model');
-const sessionSchema = require('../Models/sessions.js');
-
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 // creates the User table
-const User = sequelize.define('user', userSchema);
-const sessions = sequelize.define('sessions', sessionSchema);
+let User = sequelize.define('user', userSchema);
 
-const userController = {
+// defines all of the funtions that will be executed on the User table
+let userController = {
+  //creates a user
   createUser: (req, res, next) => {
-    console.log(req.body);
-    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-      if (err) {
-        console.error(`Error hashing password: ${err}`);
-      } else {
-        req.body.password = hash; // Store hash in your password DB.
-        res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1);
-        res.cookie('username', req.body.username);
-      }
-    });
-    sequelize.sync()
-    .then(() => {
+    sequelize.sync({ logging: console.log }).then(() => {
       User.create(req.body)
-        .then(results => next())
+        .then(() => {
+          res.cookie('username', req.body.username);
+          res.status(200).end();
+        })
         .catch((error) => {
-          console.error(`Error on Create New User: ${error.message}`);
+          console.log('error:', error)
           res.status(400).end();
         });
-    })
-    .catch((error) => {
-      console.error(`Error on DB Sync: ${error.message}`);
-      res.status(400).end();
     });
   },
 
+  //gets a user for validation on login  
   getUser: (req, res, next) => {
-    console.log('GET USER');
-    sessions.find({
-      where: {
-        ssid: req.body.ssid
-      }
-    })
-    .then(user => {
-      if (user) {
-        console.log('USER SESSION FOUND');
-        res.cookie('username', user.username);
-      }
-      if (!user) {
-        console.log('USER SESSION NOT FOUND');
-        User.findOne({
-          where: {
-            username: req.body.username
-          }
-        })
-        .then(user => {
-          if (!user) {
-            console.log('USER NOT FOUND');
-            return res.status(400).send('no user is the db');
-          }
-          if (user) {
-            console.log('USER FOUND');
-            bcrypt.compare(req.body.password, user.dataValues.password, (err, val) => {
-              req.session.user = user.dataValues.username;
-              res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1); //Generate cookie
-              res.cookie('username', user.username);
-              req.session.save(() => {
-                console.log('SAVING SESSION');
-                next();
-              });
-              if (val === false) res.status(400).end();
-              else next();
-            })
-          }
-        })
-        .catch(err => res.status(400).end());
-      }
-    })
-    // .catch(err => res.status(400).send(err))
-    .catch(error => {
-      console.error(`Error on SESSIONS lookup: ${error.message}`);
-      res.status(400).end();
-    });
+    User.findOne({ where: { username: req.body.username } })
+      .then((user) => {
+        console.log('FOUND THE USER:');
+        if (req.body.password === user.password) {
+          console.log('FOUND THE USER PASSWORD:', req.body.password);
+          res.cookie('username', user.username);
+          res.status(200).end();
+          // user will be the first entry of the User table with the username 'username' or null (if not exists)
+          // user.username will contain the username of the User
+        }
+        else {
+          console.log('DID NOT FIND THE USER PASSWORD');
+          res.status(400).end();
+        }
+      })
+      .catch((err) => {
+        console.log('PROBLEM WITH GET-USER REQUEST');
+        console.error(err);
+        res.status(400).end();
+      })
   }
 }
 

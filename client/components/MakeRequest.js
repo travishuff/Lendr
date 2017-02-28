@@ -1,47 +1,33 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
-import axios from 'axios';
 const cookieParser = require('cookie-parser');
 
-
 class MakeRequest extends Component {
-  constructor(props) {
-    super(props)
-    this.makeRequest = this.makeRequest.bind(this);
-  }
-  makeRequest(event) {
+  makeReq(event) {
     event.preventDefault();
-    console.log('this runs');
+
+    // get relevant data
     const title = event.target.elements[0].value;
     const note = event.target.elements[1].value;
     const lendeename = document.cookie.split('=').pop();
 
     //  Post request to be saved to the database
-    axios.post('/makeRequest', {
-        lendeename: lendeename,
-        itemname: title,
-        note: note
-    })
-    .then((data) => {
-      console.log(data);
-      browserHistory.push('/userInfo');
-    })
-    .catch(error => console.error(`Error message: ${error.message}`));
+
+    $.post('/makeRequest', { lendeename: lendeename, itemname: title, note: note })
+      .done(data => {
+        console.log(data);
+        browserHistory.push('/userInfo')
+      })
+      .fail(() => console.error('error with makeRequest'));
   }
 
   render() {
     return (
-      <div className="makeRequest-form">
-        <form onSubmit={this.makeRequest}>
-          <div className="form-group">
-            <label for="title">Title:</label>
-            <input type="text" className="form-control" name="title" placeholder="title" />
-          </div>
-          <div className="form-group">
-            <label for="description">Description:</label>
-            <textarea className="form-control" name="description" placeholder="place a note here..." />
-          </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
+      <div>
+        <form className="form-inline" onSubmit={this.makeReq}>
+          <div><input type="text" className="form-control" name="title" placeholder="title" /></div>
+          <div><textarea rows="4" cols="50" className="form-control" name="note" placeholder="place a note here.." /></div>
+          <div><button type="submit" className="btn btn-primary">Submit</button></div>
         </form>
       </div>
     );

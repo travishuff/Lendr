@@ -1,6 +1,10 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('lendrdb', 'travishuff', 'tron1k', {
+// setting up a sequel connection pool using postgres as the dialect 
+
+//  Make sure to 'createdb lendrdb' in your Lendr repo folder to create initial database
+//  Set credentials below to your computer's username and password
+const sequelize = new Sequelize('lendrdb', 'travishuff', '', {
   host: 'localhost',
   dialect: 'postgres'
 });
@@ -8,7 +12,11 @@ const sequelize = new Sequelize('lendrdb', 'travishuff', 'tron1k', {
 // authenticating that the sequel connection was successfully created
 sequelize
   .authenticate()
-  .then(() => console.log('DB connection successful👾'))
-  .catch((err) => console.error('DB connection unsuccessful:', err));
+  .then(function(err) {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(function (err) {
+    console.log('Unable to connect to the database:', err);
+  });
 
 module.exports = sequelize;

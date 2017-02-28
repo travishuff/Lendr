@@ -1,35 +1,42 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { Component } from 'react';
+import { Router, Route, Link, browserHistory } from 'react-router';
 
-const Signup = ({createUser}) => {
-  return (
-    <div className="signup-form">
-      <form onSubmit={createUser}>
-        <div className="form-group">
-          <label for="username">Username:</label>
+class Signup extends Component {
+  createUser(event) {
+    // need this
+    event.preventDefault();
+
+    // access username and password values
+    const username = event.target.elements[0].value;
+    const password = event.target.elements[1].value;
+    const location = event.target.elements[2].value + ', ' + event.target.elements[3].value;
+
+    //////////////////////////////////
+    // Post request to create new user
+    // Redirects to signup page for invalid inputs
+    // Maybe create error page 
+    $.post('/signup', { username: username, password: password, location: location, karma: 0 })
+      .done((data) => {
+        browserHistory.push('/browse');
+      })
+      .fail(() => {
+        browserHistory.push('/');
+      })
+  }
+
+  render() {
+    return (
+      <div>
+        <form className="form-inline" onSubmit={this.createUser}>
           <input type="text" className="form-control" name="username" placeholder="username" />
-        </div>
-        <div className="form-group">
-          <label for="password">Password:</label>
           <input type="password" className="form-control" name="password" placeholder="password" />
-        </div>
-        <div className="form-group">
-          <label for="email">Email:</label>
-          <input type="email" className="form-control" name="email" placeholder="email" />
-        </div>
-        <div className="form-group">
-          <label for="street">Street Address:</label>
           <input type="text" className="form-control" name="street" placeholder="street address" />
-        </div>
-        <div className="form-group">
-          <label for="zipcode">ZIP Code:</label>
-          <input type="text" className="form-control" name="zipcode" placeholder="ZIP code" />
-        </div>
-        <button type="submit" className="btn btn-primary">Sign Up</button>
-        <Link to="/" className="btn btn-primary">Back</Link>
-      </form>
-    </div>
-  );
+          <input type="text" className="form-control" name="zipcode" placeholder="zip code" />
+          <button type="submit" className="btn btn-primary">Sign Up</button>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default Signup;
